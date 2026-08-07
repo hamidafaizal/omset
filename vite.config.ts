@@ -4,6 +4,10 @@ import { VitePWA } from 'vite-plugin-pwa'
 import path from 'path'
 
 export default defineConfig({
+  // Menambahkan pengaturan untuk mengatasi error CSS di Vercel
+  build: {
+    cssMinify: 'esbuild',
+  },
   plugins: [
     react(),
     VitePWA({
@@ -33,7 +37,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      // Memperbaiki peringatan __dirname sesuai saran Vite
+      "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
 })
